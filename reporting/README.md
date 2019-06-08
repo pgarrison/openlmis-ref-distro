@@ -49,6 +49,31 @@ Steps:
     connector.  Note this should be 1 per Postgres cluster.
 6. (optional) `./debezium-console.sh` to show the events streamed to the topic.
 
+## Notes on Project Casper (WIP)
+
+Project Casper is the ["friendly" ghost migration](https://en.wikipedia.org/wiki/Casper_the_Friendly_Ghost).
+It demonstrates the possibility of streaming changes from an OpenLMIS v2 system
+to v3 automatically, in near real-time. It does this using Kafka,
+Kafka Connect, Debezium and Nifi.
+
+This is still a work-in-progress and very much a proof of concept. Steps to get
+it working:
+
+1. Get a working OpenLMIS v2 system running, with Postgres at `localhost:5432`.
+2. Ensure your v2 Postgres is configured for Debezium, [instructions](https://debezium.io/docs/connectors/postgresql/#setting-up-PostgreSQL).
+3. Start the OpenLMIS v3 Ref Distro.
+4. In a new terminal, run `./casper-start.sh` to start Kafka, Kafka Connect and Nifi.
+5. Go to Nifi at `localhost:8080/nifi` and upload the `TransformRequisitionsV2ToV3.xml` template in this folder.
+6. Create a new process group in Nifi and add the template just uploaded to this process group.
+7. Ensure all of the processors in the group are running.
+8. In a new terminal, run `./casper-register-v2-source.sh` to register the v2 source connector. The response JSON of the connector should print to show the connector was registered.
+9. Go to Kafka Topics UI at `localhost:8000` to see all of the topics in Kafka. You should see two--`original.requisition.requisitions` for v2 requisitions and `requisition.requisitions` for v3 requisitions.
+10. Then, run `./casper-register-v3-sink.sh` to register the v3 sink connector.
+11. Now, any changes you make to requisitions in the v2 system should automatically register in v3.
+
+The Nifi template/process group is responsible for the transforms. Some v2-v3
+mapping files, which are used for this proof of concept, can be found in the
+`config/services/nifi/casper` folder.
 
 ## Notes on running Kafka
 

@@ -1,0 +1,6 @@
+"periodid"	"processingperiodid"
+"int32"	"string"
+"int64"	"string"
+"io.debezium.time.MicroTimestamp"	"io.debezium.time.ZonedTimestamp"
+"createdby"	"numberofmonthsinperiod"
+"modifiedby"	"templateid"
