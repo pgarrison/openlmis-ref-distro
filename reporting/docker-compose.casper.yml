@@ -2,9 +2,7 @@ version: "3.3"
 services:
 
   connect:
-    image: debezium/connect:${DEBEZIUM_VERSION}
-    build:
-      context: debezium-connect
+    image: openlmis/debezium-connect
     ports:
      - 8083:8083
     networks:
