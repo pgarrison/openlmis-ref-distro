@@ -15,6 +15,13 @@ services:
      - OFFSET_STORAGE_TOPIC=my_connect_offsets
      - HOST_NAME=0.0.0.0
 
+  redis:
+    image: redis:3.2.12
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - mapping-volume:/data
+
   kafka-rest:
     image: confluentinc/cp-kafka-rest
     ports:
@@ -37,6 +44,10 @@ services:
       - KAFKA_REST_PROXY_URL=http://kafka-rest:8082
       - PROXY=true
       - MAX_BYTES=500000
+
+volumes:
+  mapping-volume:
+    external: false
 
 networks:
  openlmis-ref-distro_default:

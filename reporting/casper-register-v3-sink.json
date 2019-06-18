@@ -3,7 +3,7 @@
 	"config": {
 	    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
 	    "tasks.max": "1",
-	    "topics": "requisition.requisitions",
+	    "topics": "requisition.requisitions,requisition.requisition_line_items",
 	    "connection.url": "jdbc:postgresql://olmis-db:5432/open_lmis?stringtype=unspecified",
 	    "connection.user": "postgres",
 	    "connection.password": "p@ssw0rd",
