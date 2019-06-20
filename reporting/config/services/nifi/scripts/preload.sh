@@ -136,7 +136,7 @@ restartFlows() {
       controllerServiceId=$(curl -s -X GET $NIFI_BASE_URL/nifi-api/flow/process-groups/${processorGroupId}/controller-services | jq -r ".controllerServices[$key].component.id")
       controllerServiceName=$(curl -s -X GET $NIFI_BASE_URL/nifi-api/flow/process-groups/${processorGroupId}/controller-services | jq -r ".controllerServices[$key].component.name")
 
-      if [ "$controllerServiceName" == "DBCPConnectionPool" ];
+      if [ "$controllerServiceName" == "DBCPConnectionPool" ] || [ "$controllerServiceName" == "OLMISDBCPConnectionPool" ];
       then
         curl -i -X PUT -H 'Content-Type: application/json' -d '{"revision":{"clientId":"random", "version":"0"},"component":{"id":"'"${controllerServiceId}"'","properties":{"Password":"'"$7"'"}}}' $NIFI_BASE_URL/nifi-api/controller-services/${controllerServiceId}
       else
@@ -148,7 +148,10 @@ restartFlows() {
     curl -s -X GET $NIFI_BASE_URL/nifi-api/flow/process-groups/${processorGroupId}/controller-services | jq '.controllerServices|keys[]' | while read key ;
     do
       controllerServiceId=$(curl -s -X GET $NIFI_BASE_URL/nifi-api/flow/process-groups/${processorGroupId}/controller-services | jq -r ".controllerServices[$key].component.id")
-      curl -i -X PUT -H 'Content-Type: application/json' -d '{"revision":{"clientId":"random", "version":"1"},"component":{"id":"'"${controllerServiceId}"'","state":"ENABLED"}}' $NIFI_BASE_URL/nifi-api/controller-services/${controllerServiceId}
+      controllerServiceName=$(curl -s -X GET $NIFI_BASE_URL/nifi-api/flow/process-groups/${processorGroupId}/controller-services | jq -r ".controllerServices[$key].component.name")
+
+      versionNumber=$(curl -s -X GET $NIFI_BASE_URL/nifi-api/controller-services/${controllerServiceId} | jq -r ".revision.version")
+      curl -i -X PUT -H 'Content-Type: application/json' -d '{"revision":{"clientId":"random", "version":"'"${versionNumber}"'"},"component":{"id":"'"${controllerServiceId}"'","state":"ENABLED"}}' $NIFI_BASE_URL/nifi-api/controller-services/${controllerServiceId}
     done
 
     # find invokehttp processors and update password

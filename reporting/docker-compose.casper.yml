@@ -18,7 +18,10 @@ services:
   redis:
     image: redis:3.2.12
     command: ["redis-server", "--appendonly", "yes"]
-    hostname: redis
+    networks:
+      default:
+        aliases:
+          - caspercache
     volumes:
       - mapping-volume:/data
 

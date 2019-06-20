@@ -69,6 +69,9 @@ services:
     volumes:
       - config-volume:/config
       - ./nifi-cache:/tmp/nifi-docker-cache
+    networks:
+      - default
+      - openlmis-ref-distro_default
     entrypoint: >
       bash -c "/config/nifi/scripts/start.sh ${OL_NIFI_VERSION} ${BASE_URL} ${USERNAME} ${PASSWORD} ${CLIENT_ID} ${CLIENT_SECRET} ${DB_PASSWORD} ${FHIR_ID} ${FHIR_PASSWORD}"
     logging:
@@ -152,3 +155,7 @@ volumes:
     external: false
   db-config-volume:
     external: false
+
+networks:
+ openlmis-ref-distro_default:
+   external: true
