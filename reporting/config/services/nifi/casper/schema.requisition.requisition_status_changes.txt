@@ -1,0 +1,4 @@
+"rnrid"	"requisitionid"
+"int64"	"string"
+"io.debezium.time.MicroTimestamp"	"io.debezium.time.ZonedTimestamp"
+"RELEASED_NO_ORDER"	"RELEASED_WITHOUT_ORDER"

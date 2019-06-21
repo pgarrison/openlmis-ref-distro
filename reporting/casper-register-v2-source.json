@@ -10,7 +10,7 @@
 		"database.password": "p@ssw0rd",
 		"database.dbname" : "open_lmis",
 		"database.server.name": "openlmis",
-		"table.whitelist": "public\\.requisitions,public\\.requisition_line_items",
+		"table.whitelist": "public\\.requisitions,public\\.requisition_line_items,public\\.requisition_status_changes",
 		"database.history.kafka.bootstrap.servers": "kafka:29092",
 		"database.history.kafka.topic": "openlmis",
 		"transforms": "unwrap,route",
