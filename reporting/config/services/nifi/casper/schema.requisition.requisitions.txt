@@ -4,3 +4,4 @@
 "io.debezium.time.MicroTimestamp"	"io.debezium.time.ZonedTimestamp"
 "createdby"	"numberofmonthsinperiod"
 "modifiedby"	"templateid"
+"RELEASED_NO_ORDER"	"RELEASED_WITHOUT_ORDER"
