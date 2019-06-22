@@ -4303,7 +4303,7 @@
                     <type>org.apache.nifi.processors.standard.ReplaceText</type>
                 </processors>
             </contents>
-            <name>TransformReqStatusChangesV2ToV3</name>
+            <name>Transform Req Status Changes V2 To V3</name>
             <variables/>
         </processGroups>
     </snippet>

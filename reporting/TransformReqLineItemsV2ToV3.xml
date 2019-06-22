@@ -4165,7 +4165,7 @@
                             </entry>
                             <entry>
 <key>group.id</key>
-<value>nifi-rli-consumer-group-13</value>
+<value>nifi-rli-consumer-group</value>
                             </entry>
                             <entry>
 <key>auto.offset.reset</key>
