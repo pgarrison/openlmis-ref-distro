@@ -1,0 +1,6 @@
+"rnrid"	"requisitionid"
+"int64"	"string"
+"io.debezium.time.MicroTimestamp"	"io.debezium.time.ZonedTimestamp"
+"commenttext"	"body"
+"createdby"	"status"
+"modifiedby"	"statuschangeid"
