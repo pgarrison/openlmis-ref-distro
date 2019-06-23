@@ -62,13 +62,11 @@ it working:
 1. Get a working OpenLMIS v2 system running, with Postgres at `localhost:5432`.
 2. Ensure your v2 Postgres is configured for Debezium, [instructions](https://debezium.io/docs/connectors/postgresql/#setting-up-PostgreSQL).
 3. Start the OpenLMIS v3 Ref Distro.
-4. In a new terminal, run `./casper-start.sh` to start Kafka, Kafka Connect and Nifi.
-5. Go to Nifi at `localhost:8080/nifi` and upload the transform XML templates in this folder.
-6. Add the templates just uploaded.
-7. In a new terminal, run `./casper-register-v2-source.sh` to register the v2 source connector. The response JSON of the connector should print to show the connector was registered.
-8. Run `./casper-register-v3-sink.sh` to register the v3 sink connector.
-9. Then, ensure all of the processors in each group are running.
-10. Now, any changes you make to requisitions in the v2 system should automatically register in v3.
+4. In a new terminal, run `./casper-start.sh` to start Kafka, Kafka Connect, Nifi and Redis.
+5. In another new terminal, run `./casper-register-v2-source.sh` to register the v2 source connector. The response JSON of the connector should print to show the connector was registered.
+6. Then, run `./casper-register-v3-sink.sh` to register the v3 sink connector.
+7. Go to Nifi at `localhost:8080/nifi` and ensure all of the processors in each group are running.
+8. Now, any changes you make to requisitions in the v2 system should automatically register in v3.
 
 To see what is stored on Kafka, you can go to Kafka Topics UI at `localhost:8000` to see the topics. Data for v2 starts with `original.requisition.` and for v3 `requisition.`.
 
